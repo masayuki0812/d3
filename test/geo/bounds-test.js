@@ -64,11 +64,43 @@ suite.addBatch({
         coordinates: [[[-123, 39], [-122, 38]]]
       }), [[-123, 38], [-122, 39]]);
     },
-    "MultiPoint": function(bounds) {
-      assert.deepEqual(bounds({
-        type: "MultiPoint",
-        coordinates: [[-123, 39], [-122, 38]]
-      }), [[-123, 38], [-122, 39]]);
+    "MultiPoint": {
+      "simple": function(bounds) {
+        assert.deepEqual(bounds({
+          type: "MultiPoint",
+          coordinates: [[-123, 39], [-122, 38]]
+        }), [[-123, 38], [-122, 39]]);
+      },
+      "two points near antimeridian": function(bounds) {
+        assert.deepEqual(bounds({
+          type: "MultiPoint",
+          coordinates: [[-179, 39], [179, 38]]
+        }), [[179, 38], [-179, 39]]);
+      },
+      "two points near antimeridian, two points near primary meridian": function(bounds) {
+        assert.deepEqual(bounds({
+          type: "MultiPoint",
+          coordinates: [[-179, 39], [179, 38], [-1, 0], [1, 0]]
+        }), [[179, 0], [1, 39]]);
+      },
+      "two points near primary meridian, two points near antimeridian": function(bounds) {
+        assert.deepEqual(bounds({
+          type: "MultiPoint",
+          coordinates: [[-1, 0], [1, 0], [-179, 39], [179, 38]]
+        }), [[179, 0], [1, 39]]);
+      },
+      "four mixed points near primary meridian and antimeridian": function(bounds) {
+        assert.deepEqual(bounds({
+          type: "MultiPoint",
+          coordinates: [[-1, 0], [-179, 39], [1, 0], [179, 38]]
+        }), [[-179, 0], [179, 39]]);
+      },
+      "three points near antimeridian": function(bounds) {
+        assert.deepEqual(bounds({
+          type: "MultiPoint",
+          coordinates: [[178, 38], [179, 39], [-179, 37]]
+        }), [[178, 37], [-179, 39]]);
+      }
     },
     "MultiPolygon": function(bounds) {
       assert.deepEqual(bounds({
