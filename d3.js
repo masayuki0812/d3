@@ -467,11 +467,6 @@ d3 = function() {
   } catch (e) {
     d3_array = d3_arrayCopy;
   }
-  var d3_arraySubclass = [].__proto__ ? function(array, prototype) {
-    array.__proto__ = prototype;
-  } : function(array, prototype) {
-    for (var property in prototype) array[property] = prototype[property];
-  };
   d3.touches = function(container, touches) {
     if (arguments.length < 2) touches = d3_eventSource().touches;
     return touches ? d3_array(touches).map(function(touch) {
@@ -539,6 +534,11 @@ d3 = function() {
       return drag;
     };
     return d3.rebind(drag, event, "on");
+  };
+  var d3_arraySubclass = [].__proto__ ? function(array, prototype) {
+    array.__proto__ = prototype;
+  } : function(array, prototype) {
+    for (var property in prototype) array[property] = prototype[property];
   };
   function d3_selection(groups) {
     d3_arraySubclass(groups, d3_selectionPrototype);

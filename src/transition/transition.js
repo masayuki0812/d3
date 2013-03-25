@@ -1,5 +1,5 @@
 import "../arrays/map";
-import "../core/array";
+import "../core/array-subclass";
 import "../event/dispatch";
 import "../event/timer";
 import "../interpolate/ease";

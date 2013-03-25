@@ -1,4 +1,4 @@
-import "../core/array";
+import "../core/array-subclass";
 import "selection";
 
 function d3_selection_enter(selection) {

@@ -1,4 +1,5 @@
 import "../core/array";
+import "../core/array-subclass";
 import "../core/document";
 
 function d3_selection(groups) {
