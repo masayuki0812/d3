@@ -7956,7 +7956,7 @@ d3 = function() {
   };
   d3_time_daySymbols.forEach(function(day, i) {
     day = day.toLowerCase();
-    i = 7 - i;
+    i = 7 - i - 1; // -1 for Monday
     var interval = d3.time[day] = d3_time_interval(function(date) {
       (date = d3.time.day(date)).setDate(date.getDate() - (date.getDay() + i) % 7);
       return date;
