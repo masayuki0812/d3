@@ -7879,10 +7879,13 @@ d3 = function() {
       return date;
     }
     function range(t0, t1, dt) {
-      var time = ceil(t0), times = [];
+      var time = ceil(t0), times = [], n = 0, last_n = 0, total_n = 0;
       if (dt > 1) {
         while (time < t1) {
-          if (!(number(time) % dt)) times.push(new Date(+time));
+          n = number(time);
+          if (n === 1 || n === 2) total_n += last_n + (1 - n);
+          if (!(n + total_n) % dt) times.push(new Date(+time));
+          last_n = n;
           step(time, 1);
         }
       } else {
